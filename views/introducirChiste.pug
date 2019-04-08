@@ -1,0 +1,20 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		title Introducir Chiste
+
+	body
+		form(id="chisteForm" action="/introducir/chiste" method="post")
+			p
+				label(for="chistacoForm") Chistaco:
+				textarea(type="text" id="chistacoForm" name="chiste")
+
+			p
+				if categorias
+					select(name="id_categoria" form="chisteForm")
+						each categoria in categorias
+							option(value=categoria.id_categoria) #{categoria.categoria}
+
+			p
+				input(type="submit" id="boton1" value="Subir Chiste")
