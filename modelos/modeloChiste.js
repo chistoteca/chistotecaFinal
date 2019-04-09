@@ -1,14 +1,6 @@
-const mysql = require('mysql');
-const conectar = require('../conectar');
+const mysql = require('mysql');//requiere el módulo 'mysql'
+const conectar = require('../conectar');//requiere el archivo 'conectar.js', que conecta con la BD
 
-const login = (callback) => {
-	conectar.query('SELECT * FROM usuarios', (error, result) => {
-		if (error) throw error;
-		else {
-			return callback(error, result);
-		};
-	});
-};
 
 const todasCategorias = (callback) => {
 	conectar.query('SELECT * FROM categorias', (error, result) => {
@@ -19,21 +11,24 @@ const todasCategorias = (callback) => {
 	});
 };
 
+/* la constante, a través de la función, hace una consulta (query) a la BD a través de la constante 
+'conectar', que a su vez tiene otra función callback*/
 const listaCategoria = (categoria,callback)=>{
-	conectar.query('SELECT * FROM categorias', categoria, (error, resultado)=>{
-		if (error) throw error;
+	conectar.query('SELECT * FROM categorias', categoria, (error, resultado)=>{//'categoria' es la función anterior
+		if (error) throw error;//si no lo encuentra, sale error
 		else{
-			return callback(error, resultado);
+			return callback(error, resultado);//si es correcto, llama a la función callback y ofrece el resultado
 		}
 	});
 };
 
+/* la constante, a través de la función, hace una consulta (query) a la BD a través de la constante 
+'conectar', que a su vez tiene otra función callback*/
 const consultaChiste = (id_categoria, callback) =>{
-	console.log('hola')
-	conectar.query('SELECT chiste FROM chistes WHERE id_categoria = ?', id_categoria, (error, result) =>{
-		console.log(result);
-		return callback(error, result);
+	conectar.query('SELECT chiste FROM chistes WHERE id_categoria = ?', id_categoria, (error, result) =>{//'id_categoria' es la función anterior
+		return callback(error, result);//si es correcto, llama a la función callback y ofrece el resultado
 	});
+}
 
 const introducirChiste = (chiste, callback) => {
 	conectar.query('INSERT INTO chistes (chiste, id_categoria) VALUES ("' + chiste.chiste + '", "' + chiste.id_categoria + '")', (error, result) => {
@@ -45,10 +40,11 @@ const introducirChiste = (chiste, callback) => {
 	});
 };
 
+//exporto las constantes, que son métodos, al archivo 'controlador.js'
 module.exports = {
 	todasCategorias,
 	introducirChiste,
 	listaCategoria,
-	consultaChiste,
-	login
+	consultaChiste
+
 };
