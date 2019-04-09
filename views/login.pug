@@ -1,0 +1,17 @@
+doctype html
+html
+	head
+		title Login
+		meta(charset="utf-8")
+	body
+		h2 Identificación:
+		form(id="form1" action="/login" method="post")
+			p #{mensaje}
+			p
+				label(for="usuarioForm") Usuario:
+				input(type="text" id="usuarioForm" name="usuario")
+			p
+				label(for="contrasenyaForm") Contraseña:
+				input(type="password" id="contrasenyaForm" name="contrasenya")
+			p
+				input(type="submit" id="boton1" value="Enviar")

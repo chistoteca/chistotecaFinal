@@ -2,6 +2,15 @@ const mysql = require('mysql');//requiere el módulo 'mysql'
 const conectar = require('../conectar');//requiere el archivo 'conectar.js', que conecta con la BD
 
 
+const login = (datosLogin, callback)=> {
+	conectar.query('SELECT * FROM usuarios WHERE usuario=?', datosLogin.usuario, (error, resultado)=>{
+        if(error) throw error;
+        else {
+        	return callback (error, resultado)
+        };
+    });
+};
+
 const todasCategorias = (callback) => {
 	conectar.query('SELECT * FROM categorias', (error, result) => {
 		if (error) throw error;
@@ -42,6 +51,7 @@ const introducirChiste = (chiste, callback) => {
 
 //exporto las constantes, que son métodos, al archivo 'controlador.js'
 module.exports = {
+	login,
 	todasCategorias,
 	introducirChiste,
 	listaCategoria,
