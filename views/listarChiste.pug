@@ -1,0 +1,23 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		title Listar chistes por categoría
+	body
+		if registros
+			p Selecciona la categoría:
+			form(id="seleccionaCategoriaForm" action="/listarChiste/chistes" method="get")
+				p
+					select(name="id_categoria" form="seleccionaCategoriaForm")
+						each registro in registros
+							option(value=registro.id_categoria) #{registro.categoria}
+				p
+					input(type="submit" id="boton1" value="Muestra los chistes")
+		p
+			if chistes
+				ol(type="1")
+					each chiste in chistes
+						li
+							p #{chiste.chiste}
+		p
+			a(href="/index") Volver al inicio.
