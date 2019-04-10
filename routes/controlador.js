@@ -5,7 +5,7 @@ const modelo = require('../modelos/modeloChiste');//requiero al archivo de la ca
 
 
 //GET que llama a la plantilla login.pug
-router.get('/login', (req, res)=>{
+router.get('/', (req, res)=>{
 	res.render('login');
 });
 
