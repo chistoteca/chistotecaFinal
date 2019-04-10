@@ -41,13 +41,15 @@ router.get('/listarChiste', (req, res)=>{
 			})
 		});
 
-
+//GET que llama a la plantilla introducirChiste.pug
 router.get('/introducir', (req, res) => {
 	modelo.todasCategorias((error, result) => {
 		res.render('introducirChiste', {categorias: result});
 	});
 });
 
+//POST con el que introducimos un chiste en la base de datos y redirigimos a la plantilla 'introducirChiste' para poder introducir 
+//otro chiste o bien volver a la plantilla 'index'
 router.post('/introducir/chiste', (req, res) => {
 	console.log(req.body);
 	modelo.introducirChiste(req.body, (error, result) => {
