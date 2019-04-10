@@ -1,16 +1,17 @@
 const mysql = require('mysql');//requiere el módulo 'mysql'
 const conectar = require('../conectar');//requiere el archivo 'conectar.js', que conecta con la BD
 
-
+//Búsqueda en la base de datos de los datos introducidos por el usuario
 const login = (datosLogin, callback)=> {
 	conectar.query('SELECT * FROM usuarios WHERE usuario=?', datosLogin.usuario, (error, resultado)=>{
-        if(error) throw error;
-        else {
-        	return callback (error, resultado)
-        };
-    });
+        	if(error) throw error;
+        	else {
+        		return callback (error, resultado)
+        	};
+    	});
 };
 
+//Búsqueda en la base de datos de las categorías
 const todasCategorias = (callback) => {
 	conectar.query('SELECT * FROM categorias', (error, result) => {
 		if (error) throw error;
@@ -39,9 +40,9 @@ const consultaChiste = (id_categoria, callback) =>{
 	});
 }
 
+//Insertar en la base de datos el chiste y categoría introducidos por el usuario
 const introducirChiste = (chiste, callback) => {
 	conectar.query('INSERT INTO chistes (chiste, id_categoria) VALUES ("' + chiste.chiste + '", "' + chiste.id_categoria + '")', (error, result) => {
-		console.log('modelo: ' + chiste.chiste + ', ' + chiste.id_categoria);
 		if (error) throw error;
 		else {
 			return callback(error, result);
@@ -56,5 +57,4 @@ module.exports = {
 	introducirChiste,
 	listaCategoria,
 	consultaChiste
-
 };
